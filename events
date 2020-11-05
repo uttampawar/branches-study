@@ -1,0 +1,1 @@
+ cycles,instructions,frontend_retired.dsb_miss,dsb2mite_switches.penalty_cycles,idq.all_dsb_cycles_4_uops,idq.all_dsb_cycles_any_uops,idq.dsb_cycles,idq.dsb_uops,idq.ms_dsb_cycles,idq.all_mite_cycles_4_uops,idq.all_mite_cycles_any_uops,idq.mite_cycles,idq.mite_uops,idq.ms_mite_uops,BR_INST_RETIRED.ALL_BRANCHES,branches,br_misp_retired.all_branches_pebs,br_misp_retired.conditional
