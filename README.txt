@@ -1,28 +1,32 @@
-This directory contains small test program to mimic Zend-PHP's
-virtual machine. In PHP's VM program moves from an opcode to
-opcode with more complex interaction. This program is much simpler.
-It just depicts the flow showing similar% very high branch
-mispredicts with given test input from a file. It can also generate
-different flow of opcodes with using random number generator.
+This directory contains small test program to mimic Zend-PHP's virtual machine.
+In PHP's VM program moves from an opcode to opcode with more complex
+interaction. This program is much simpler. It tries to depicts the flow showing 
+very high branch mispredicts (similar to ZendVM) with given test input from a 
+file. It can also generate different flow of opcodes with internal random number
+generator.
+
+################################################################################
 Files:
+################################################################################
 test.c - Main program
 sub.c  - supported functions
 test.input - input. Contain 3000 numbers (nodes)
 build.sh - build script
 
-Usage:
+################################################################################
+Build and Usage:
 $ ./build.sh
 
-# Run using input file and 1500 nodes/opcodes
+# Run with supplied input file to use 1500 nodes/opcodes
 $ ./a.out 1500 0
 
-# Run using interbal dynamic number generator and 1500 nodes/opcodes
+# Use internal dynamic number generator to create a list of 1500 nodes/opcodes
 $ ./a.out 1500 1
 
-#################################################################################
+################################################################################
 # Examples ...
 # Various perf stat/LBR data collection
-#################################################################################
+################################################################################
 
 $ perf stat ./a.out 1500 0
 Create a flow with 1500 nodes
@@ -45,7 +49,11 @@ Finished
       16.144911000 seconds user
        0.004000000 seconds sys
 
-$ ~/pmu-tools/toplev.py --core S0-C0 -l2  -v --no-desc taskset -c 0 ./a.out 1500 0
+################################################################################
+# toplev.py: 
+#  $ git clone https://github.com/andikleen/pmu-tools.git
+################################################################################
+$ pmu-tools/toplev.py --core S0-C0 -l2 -v --no-desc taskset -c 0 ./a.out 1500 0
 Will measure complete system.
 Using level 2.
 Create a flow with 1500 nodes
@@ -69,16 +77,18 @@ S0-C0-T1 MUX                                                %                   
 Run toplev --describe Fetch_Bandwidth^ to get more information on bottleneck
 Add --nodes '!+Fetch_Bandwidth*/3,+MUX' for breakdown on the bottleneck.
 
-#################################################################################
+################################################################################
 # LBR data
 #
 # python-lbr-data-tool: 
 #    $ git clone https://gitlab.devtools.intel.com/RPO/python-lbr-data-tool.git
-#################################################################################
+################################################################################
 $ perf record -g -BN --no-buffering -j any,u -e cycles,instructions ./a.out 1500 0
 $ perf script -F brstack &> dump.txt
-$ python3  $HOME/python-lbr-data-tool/PFData.py -json brstack.json dump.txt
-$ python3  $HOME/python-lbr-data-tool/PFData.py -fs M -ts M  brstack.json > summary.txt
+$ python3 python-lbr-data-tool/PFData.py -json brstack.json dump.txt
+$ python3 python-lbr-data-tool/PFData.py -fs M -ts M brstack.json > summary.txt
+
+# Review summary output
 $ less summary.txt
 -----------------------------
 Totals:
