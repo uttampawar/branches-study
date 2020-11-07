@@ -1,2 +1,4 @@
 *.o
 a.out
+switch_test
+goto_test
