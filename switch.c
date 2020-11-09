@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <string.h>
 #include "test.h"
 
 extern struct opline * current;
@@ -10,7 +11,8 @@ extern struct opline * tail;
 //Tail block
 static void add_a_tail_block(void * labels[]) {
 	tail = (struct opline *)malloc(sizeof(struct opline));
-	tail->name = "done";
+	memset(tail->name, '\0', 8);
+	strncpy(tail->name, "done", 4);
 	tail->lineno = 256;
 	tail->handler = NULL;
 	tail->next = NULL;

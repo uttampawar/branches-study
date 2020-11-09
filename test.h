@@ -2,7 +2,7 @@
 
 struct opline {
 	int lineno;
-	char *name;
+	char name[8];
 	void * handler;
 	struct opline * next;
 };

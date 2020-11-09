@@ -12,6 +12,7 @@ test.c - Main program (goto implementation)
 sub.c  - supported functions
 test-switch.c - "switch" implementation
 sub-switch.c  - supported functions
+test.h - supported header file
 test.input - input. Contain 3000 numbers (nodes)
 build.sh - build script
 
