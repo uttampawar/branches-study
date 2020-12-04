@@ -81,45 +81,8 @@ Run toplev --describe Fetch_Bandwidth^ to get more information on bottleneck
 Add --nodes '!+Fetch_Bandwidth*/3,+MUX' for breakdown on the bottleneck.
 
 ################################################################################
-# LBR data
-#
-# python-lbr-data-tool: 
-#    $ git clone https://gitlab.devtools.intel.com/RPO/python-lbr-data-tool.git
+# LBR data collection of any type of branches direct or indirect
 ################################################################################
 $ perf record -g -BN --no-buffering -j any,u -e cycles,instructions ./a.out 1500 0
 $ perf script -F brstack &> dump.txt
-$ python3 python-lbr-data-tool/PFData.py -json brstack.json dump.txt
-$ python3 python-lbr-data-tool/PFData.py -fs M -ts M brstack.json > summary.txt
-
-# Review summary output
-$ less summary.txt
------------------------------
-Totals:
-    Count:                  4520737
-    Mispredicted Cycles:    8961468 (19%)
-    Predicted Cycles:       36181265 (80%)
-    Total Cycles            45142733
------------------------------
-0x55555555526a
-Count: 113085 (2%)
-Mispredicted Cycles: 967955 (10%)
-Predicted Cycles: 162998 (0%)
-  Total Cycles: 1130953
-
-    M:12%       0x5555555552a0
-                  Count: 15207 (13%),
-                  Mispredicted Cycles: 123586 (81%),
-                  Predicted Cycles:28340 (18%)
-    M:11%       0x555555555258
-                  Count: 12130 (10%),
-                  Mispredicted Cycles: 111127 (85%),
-                  Predicted Cycles:19239 (14%)
-    M:10%       0x5555555552e8
-                  Count: 10641 (9%),
-                  Mispredicted Cycles: 104003 (92%),
-                  Predicted Cycles:8092 (7%)
-...
-...
-...
-
 
