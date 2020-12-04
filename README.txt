@@ -8,11 +8,11 @@ generator.
 ################################################################################
 Files:
 ################################################################################
-test.c - Main program (goto implementation)
-sub.c  - supported functions
-test-switch.c - "switch" implementation
-sub-switch.c  - supported functions
-test.h - supported header file
+test-goto.c - Main program (goto implementation)
+test-switch.c - Main program (switch implementation)
+goto.c - "goto" implementation support functions
+switch.c  - "switch" implementation support functions
+test.h - support header file
 test.input - input. Contain 3000 numbers (nodes)
 build.sh - build script
 
