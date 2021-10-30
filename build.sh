@@ -2,6 +2,8 @@ flags="-fcf-protection=none -g -O2"
 flags="-DDEBUG -g -O2"
 flags="-g -O2"
 flags="-O3"
+
+echo "Build flag set to ${flags}"
 echo "Compiling goto.c"
 gcc ${flags} -c goto.c
 echo "Compiling test-goto.c"
