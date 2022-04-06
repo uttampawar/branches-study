@@ -1,7 +1,11 @@
 flags="-fcf-protection=none -g -O2" # this is not to generate endbr64 instruction
 flags="-DDEBUG -g -O2"
 flags="-g -O2"
+flags="-O3 -fcf-protection=none"
 flags="-O3"
+
+echo "Cleaning old build"
+/bin/rm -f *.o
 
 echo "Build flag set to ${flags}"
 echo "Compiling goto.c"
