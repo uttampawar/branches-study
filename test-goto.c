@@ -19,17 +19,47 @@ void print_the_flow() {
 #endif
 }
 
+void usage(char *pname) {
+  printf("Usage:\n");
+  printf("%s -n <nodes> -r\n", pname);
+  printf("-n nodes: Number of function nodes to create/use\n");
+  printf("-r      : Create nodes dynamically using random generator.\n");
+  printf("          Default is to use input from a test.input file\n");
+  exit(0);;
+}
+
 int main(int argc, char **argv) {
 
 	float t = 3.14;
-	int nodes = atoi(argv[1]);
+	int nodes = 0; //atoi(argv[1]);
 	long iter = 1000000;
 	long idx=0;
-
 	int dynamic = 0;
-	if (argc == 3) {
-		dynamic = atoi(argv[2]);
-	}
+
+  size_t optind=0;
+  if (argc == 1) {
+    usage(argv[0]);
+  }
+  printf("arguments: %d\n", argc);
+  for (optind = 1; optind < argc && argv[optind][0] == '-'; optind++) {
+    switch(argv[optind][1]) {
+      case 'n': 
+        optind++;
+        nodes = atoi(argv[optind]);
+        break;
+      case 'r': 
+		    dynamic = 1;
+        printf("Use input created dynamically\n");
+        break;
+      default:
+        printf("Invalid option. Exiting\n");
+        usage(argv[0]);
+    }
+  }
+
+  if(!dynamic) {
+    printf("Use input from a file\n");
+  }
 
 	static void * labels[] = {
 		(void*)&&x0_label,
