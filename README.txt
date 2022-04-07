@@ -39,6 +39,28 @@ $ ./goto_test -n 10000 -r
 # Various perf stat/LBR data collection
 ################################################################################
 
+Example 1 with dynamic nodes (notice option -r),
+$ perf stat ./goto_test -n 5000 -r
+Use input created dynamically
+Create a flow with 5000 nodes
+Use random number generator between 0 and 256
+Executing the opcode/functions
+Finished
+
+ Performance counter stats for './goto_test -n 5000 -r':
+
+      62988.258655      task-clock (msec)         #    1.000 CPUs utilized
+                21      context-switches          #    0.000 K/sec
+                 0      cpu-migrations            #    0.000 K/sec
+               111      page-faults               #    0.002 K/sec
+   225,252,148,972      cycles                    #    3.576 GHz
+    65,155,591,263      instructions              #    0.29  insn per cycle
+    25,028,395,848      branches                  #  397.350 M/sec
+     4,963,093,786      branch-misses             #   19.83% of all branches
+
+      62.991015715 seconds time elapsed
+
+Example 2 with provided input file (useful for the consistent input data),
 $ perf stat ./goto_test -n 10000
 Create a flow with 10000 nodes
 Building the flow from  input file
