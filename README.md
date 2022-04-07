@@ -18,21 +18,29 @@ build.sh - build script
 
 ################################################################################
 Build
+```
 $ ./build.sh
+```
 
 Usage:
+```
 $ ./goto_test
 Usage:
 ./goto_test -n <nodes> -r
 -n nodes: Number of function nodes to create/use
 -r      : Create nodes dynamically using random generator.
           Default is to use input from a test.input file
+```
 
 # Run with supplied input file to use 1500 nodes/opcodes
+```
 $ ./goto_test -n 10000
+```
 
 # Use internal dynamic number generator to create a list of 1500 nodes/opcodes
+```
 $ ./goto_test -n 10000 -r
+```
 
 ################################################################################
 # Examples ...
@@ -40,6 +48,7 @@ $ ./goto_test -n 10000 -r
 ################################################################################
 
 Example 1 with dynamic nodes (notice option -r),
+```
 $ perf stat ./goto_test -n 5000 -r
 Use input created dynamically
 Create a flow with 5000 nodes
@@ -59,8 +68,10 @@ Finished
      4,963,093,786      branch-misses             #   19.83% of all branches
 
       62.991015715 seconds time elapsed
+```
 
 Example 2 with provided input file (useful for the consistent input data),
+```
 $ perf stat ./goto_test -n 10000
 Create a flow with 10000 nodes
 Building the flow from  input file
@@ -79,11 +90,13 @@ Finished
      9,956,920,526      branch-misses             #   19.88% of all branches
 
      126.543265450 seconds time elapsed
+```
 
 ################################################################################
 # toplev.py: 
 #  $ git clone https://github.com/andikleen/pmu-tools.git
 ################################################################################
+```
 $ pmu-tools/toplev.py --core S0-C0 -l2 -v --no-desc taskset -c 0 ./goto_test -n
 10000
 S0-C0    FE             Frontend_Bound                      % Slots                      47.2    [11.1%]
@@ -101,11 +114,14 @@ S0-C0    RET            Retiring.Light_Operations           % Slots             
 S0-C0    RET            Retiring.Heavy_Operations           % Slots                       1.1  < [11.1%]
 S0-C0-T0 MUX                                                %                            11.11  
 S0-C0-T1 MUX                                                %                            11.11
+```
 
 ################################################################################
 # LBR data collection of any type of branches direct or indirect
 ################################################################################
+```
 $ perf record -g -BN --no-buffering -j any,u -e cycles,instructions
 ./goto_test -n 10000
 $ perf script -F brstack &> dump.txt
+```
 
