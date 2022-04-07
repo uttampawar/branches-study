@@ -318,9 +318,10 @@ int main(int argc, char **argv) {
 
 	//build_the_flow(labels, nodes, 1);
 	build_the_flow(labels, nodes, dynamic);
-
 	print_the_flow();
 	//exit(0);
+  
+  printf("Executing the opcode/functions\n");
 	
 	for(idx=0; idx < iter; idx++) {
 	  current = root;
