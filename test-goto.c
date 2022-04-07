@@ -30,11 +30,11 @@ void usage(char *pname) {
 
 int main(int argc, char **argv) {
 
-	float t = 3.14;
-	int nodes = 0;
-	long iter = 100000;
-	long idx=0;
-	int dynamic = 0;
+  float t = 3.14;
+  int nodes = 0;
+  long iter = 100000;
+  long idx=0;
+  int dynamic = 0;
 
   size_t optind=0;
   if (argc == 1) {
